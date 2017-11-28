@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>音乐播放器</title>
+		<link rel="stylesheet" href="music.css">
+	</head>
+	<body>
+		<h3>音乐播放器</h3>
+		<hr/>
+		<div id="CDimage">
+			<img src="C:\Users\JCHJS\Desktop\music\1.jpg" />
+		</div>
+		<div>
+			<input id="volume" type="range" min="0" max="1" step="0.1" onchange="setVolume()"/>
+		</div>
+		<div>
+			当前正在播放：<span id="title">后青春期的诗</span>
+		</div>
+		<div>
+			<button onclick="lastMusic()"><img src="C:\Users\JCHJS\Desktop\music\2.png" width="50" height="50"/>
+			</button>
+			<button id="play" onclick="playMusic()"><img src="C:\Users\JCHJS\Desktop\music\4_1.png" width="50" height="50"/>
+			</button>
+			<button onclick="nextMusic()"><img src="C:\Users\JCHJS\Desktop\music\3.png" width="50" height="50"/>
+			</button>
+		</div>
+		<audio id="audio" src="C:\Users\JCHJS\Desktop\music\5.mp3" preload>
+			对不起，您的浏览器不支持HTML5音频播放
+		</audio>
+		<script>
+		//调节音量
+		var music=document.getElementById("audio");
+		var volume=document.getElementById("volume");
+		var play=document.getElementById("play");
+		var list=new Array("C:\Users\JCHJS\Desktop\music\5.mp3","C:\Users\JCHJS\Desktop\music\6.mp3","C:\Users\JCHJS\Desktop\music\7.mp3");//音乐路径列表
+		var titleList=new Array("后青春期的诗","突然好想你","诺亚方舟");//音乐标题列表
+		var i=0;//定义第几首
+		function setVolume(){
+			music.volume=volume.value;
+		}
+		//播放暂停
+		
+		function playMusic(){
+			if(music.paused){
+				music.play();
+
+				play.innerHtml='<img src="C:\Users\JCHJS\Desktop\music\4_1.png" width="50" height="50"/>';
+			}else{
+				music.pause();
+				play.innerHtml='<img src="C:\Users\JCHJS\Desktop\music\4_2.png" width="50" height="50"/>'
+				
+			}
+		}
+		//切换歌曲
+		
+		function nextMusic(){
+			if(i==list.length-1)
+				i=0;
+			else
+				i++;
+			music.pause();
+			music.src=list[i];
+			title.innerHtml=titleList[i];
+			music.play();
+			console.log("next");
+		}
+		function lastMusic(){
+			if(i=0)
+				i==list.length-1
+			else
+				i--;
+			music.pause();
+			music.src=list[i];
+			title.innerHtml=titleList[i];
+			music.play();
+			console.log("last");
+		}
+		</script>
+	</body>
+</html>
